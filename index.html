@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omri Yaakov | CV</title>
+    
+    <!-- Google Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* Corrected to border-box */
+        }
+    
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #121212;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh; /* Ensure body can take full height */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Align content to start (top) */
+            align-items: center;
+        }
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth; /* Smooth scrolling between sections */
+        }
+    
+        /* Navigation Tabs */
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #222; /* Dark background for the nav */
+            padding: 10px 0;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1; /* Ensures the nav is always visible */
+        }
+    
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+        }
+    
+        nav a:hover, nav a.active {
+            background-color: darkslateblue; /* Highlight color for the nav on hover/active */
+        }
+    
+        /* Glitch Effect for Main Headline */
+        .glitch {
+            position: relative;
+            font-size: 5rem;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 700;
+            color: #f2f2f2;
+            letter-spacing: 0.2rem;
+            line-height: 1.2;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    
+        .glitch:before, .glitch:after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            overflow: hidden;
+        }
+    
+        .glitch:before {
+            left: 2px;
+            text-shadow: -2px 0 purple;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch 0.1s infinite linear alternate-reverse;
+        }
+    
+        .glitch:after {
+            left: -2px;
+            text-shadow: -2px 0 purple;
+            clip: rect(24px, 450px, 56px, 0);
+            animation: glitch 2s infinite linear alternate-reverse;
+        }
+    
+        @keyframes glitch {
+            0% { clip: rect(42px, 9999px, 44px, 0); }
+            20% { clip: rect(10px, 9999px, 40px, 0); }
+            40% { clip: rect(0, 9999px, 80px, 0); }
+            60% { clip: rect(30px, 9999px, 40px, 0); }
+            80% { clip: rect(50px, 9999px, 90px, 0); }
+            100% { clip: rect(70px, 9999px, 100px, 0); }
+        }
+    
+        /* Typing Effect for Subheadline */
+        .typing {
+            font-size: 1.5rem;
+            color: #b0b0b0;
+            border-right: 2px solid #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 4s steps(50, end), erase 2s steps(50, end) 4s forwards;
+            width: 30ch;
+            display: inline-block;
+            margin-top: 20px;
+            visibility: visible;
+        }
+    
+        .typingSecond {
+            display: none;
+            font-size: 1.5rem;
+            color: #b0b0b0;
+            border-right: 2px solid #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typingSecond 4s steps(50, end) forwards, blink-caret 0.75s step-end infinite;
+            width: 33ch;
+            margin-top: 20px;
+        }
+    
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 30ch; } 
+        }
+        
+        @keyframes erase {
+            from { width: 30ch; }
+            to { width: 0; }
+        }
+        
+        @keyframes typingSecond {
+            from { width: 0; }
+            to { width: 33ch; } 
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: white; }
+        }
+        
+    
+        /* Section Styles */
+        section {
+            min-height: 100vh; /* Each section takes full viewport height */
+            padding: 190px 200px; /* Padding to not hide content behind the fixed nav */
+            background-color: #1d1d1d; /* Background color for sections */
+            text-align: center;
+            border: none;
+            scroll-margin-top: 0px;
+            scroll-margin-bottom: 0px;
+            
+        }
+    
+        section.active {
+            display: block;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+    
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+    
+        section h2:before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 50px;
+            height: 3px;
+            transform: translateX(-50%);
+        }
+    
+        section p, section ul {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #ccc;
+        }
+    
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+    
+        ul li {
+            margin-bottom: 15px;
+        }
+    
+        /* recommendations Cards */
+        .recommendations-card {
+            background-color: #2c2c2c;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    
+        .recommendations-card h3 {
+            margin-bottom: 10px;
+        }
+    
+        .recommendations-card p {
+            font-size: 1rem;
+            color: #bbb;
+        }
+    
+        /* Footer */
+        footer {
+            background-color: #333;
+            text-align: center;
+            padding: 10px;
+            color: #fff;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    
+        /* Footer with Social Icons */
+        footer .social-icons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+    
+        footer .social-icons a {
+            color: #fff;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+    
+        footer .social-icons a:hover {
+            color: darkslateblue;
+        }
+    
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    
+        /* Styling for the recommendation form */
+        .recommendation-form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .recommendation-form input, .recommendation-form textarea {
+            width: 60%; /* Adjust the width for a better look */
+            padding: 10px;
+            margin: 10px auto; /* Auto margin to center horizontally */
+            border-radius: 5px;
+            border: 1px solid #333;
+            background-color: #222;
+            color: #fff;
+            display: block; /* Ensure elements stack */
+        }
+
+        .recommendation-form textarea {
+            resize: none; /* Disable resizing */
+        }
+
+        .recommendation-form button {
+            padding: 10px 20px;
+            background-color: darkslateblue;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 10px auto; /* Center the button */
+            display: block;
+            width: 100px; /* Fixed width for the button */
+        }
+
+        .recommendation-form button:hover {
+            background-color: red;
+        }
+
+        /* Styling for the recommendation list */
+        #recommendationList {
+            margin-top: 30px;
+            text-align: center;
+            color: #fff;
+            max-height: 400px; /* Set the max height to enable scrolling */
+            overflow-y: scroll; /* Enable vertical scrolling */
+            padding-right: 10px; /* Add padding to avoid overlap with scrollbar */
+        }
+
+        #recommendationList .recommendation-card {
+            background-color: #333;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            width: 60%;
+            margin: 15px auto; /* Center the cards */
+            color: #ddd;
+        }
+
+        #recommendationList .recommendation-card h3 {
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* Adjust overall section styles */
+        #blog h2 {
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        #blog .recommendation-form, #blog #recommendationList {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Optional: Hide scroll bar in WebKit browsers (e.g., Chrome, Safari) */
+        #recommendationList::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #recommendationList::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 10px;
+        }
+
+        #recommendationList::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+        .download-btn {
+            padding: 10px 20px;
+            background-color: darkslateblue;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 10px auto; /* Center the button */
+            display: block;
+            width: 150px; /* Adjust width for better appearance */
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .download-btn:hover {
+            background-color: red;
+        }
+        .certification-list {
+            display: flex;
+            flex-wrap: wrap; /* Allows wrapping to the next line if necessary */
+            justify-content: center; /* Center the items horizontally */
+            gap: 40px; /* Add space between certification items */
+            margin-top: 20px;
+        }
+        
+        .certification-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: calc(33.33% - 30px); /* Each item takes up 1/3 of the row, with space for gaps */
+            margin-bottom: 50px; /* Space between items vertically */
+        }
+        
+        .certification-item a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .certification-item a:hover {
+            color: red;
+        }
+        
+        .certification-item i {
+            font-size: 5rem; /* Adjust this value to make the icons bigger */
+            color: darkslateblue; /* Icon color */
+            margin-bottom: 10px; /* Space between icon and text */
+
+        }
+        
+        .certification-item a:hover i {
+            color: red; /* Icon color change on hover */
+        }
+
+                /* Ensuring background color consistency for all containers */
+        body, section, .profile-container, .glitch, .typing, .typingSecond {
+            background-color: #121212; /* Dark background applied to all sections and relevant elements */
+            border: none; /* Remove borders */
+        }
+        /* Experience Section */
+        .experience-container {
+            display: flex;
+            justify-content: space-between; /* Space between the boxes */
+            gap: 20px; /* Space between items */
+            margin-top: 20px;
+            flex-wrap: wrap; /* Allows wrapping for smaller screens */
+        }
+
+        .experience-box {
+            background-color: #2c2c2c;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: calc(33.33% - 20px); /* Each box will take up 1/3 of the row */
+            margin-bottom: 20px; /* Space at the bottom for smaller screens */
+            color: #fff;
+            text-align: left;
+        }
+
+        .experience-box h3 {
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .experience-box p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #bbb;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .experience-box {
+                width: 100%; /* On smaller screens, the boxes take up full width */
+            }
+        }
+
+
+        /* Neon Cursor Styles */
+        body {
+            cursor: none;
+        }
+        .cursor {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: red;
+            box-shadow: 0 0 20px darkslateblue, 0 0 40px darkred;
+            pointer-events: none; 
+            z-index: 9999;
+            transition: transform 0.00000001s ease-out;
+        }
+
+        .trail {
+            position: absolute;
+            border-radius: 50%;
+            width: 8px;
+            height: 8px;
+            background-color: red;
+            box-shadow: 0 0 8px darkslateblue, 0 0 20px darkred;
+            opacity: 0;
+            pointer-events: none;
+            animation: trail 0.5s ease-out forwards;
+        }
+
+        @keyframes trail {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(3);
+            }
+        }
+        /* Mouse Scroll Indicator */
+        .scroll-indicator {
+            margin-top: 200px; /* Adds some space between the headline and the mouse indicator */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mouse {
+            width: 30px;
+            height: 50px;
+            border: 2px solid darkslateblue; /* Use your preferred color */
+            border-radius: 20px;
+            position:relative;
+        }
+
+        .mouse-wheel {
+            display: block;
+            width: 6px;
+            height: 10px;
+            background-color: red;
+            border-radius: 10px;
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scroll-wheel 1.5s ease-in-out infinite;
+        }
+
+        @keyframes scroll-wheel {
+            0% {
+                top: 10px;
+                opacity: 1;
+            }
+            50% {
+                top: 25px;
+                opacity: 0;
+            }
+            100% {
+                top: 10px;
+                opacity: 1;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#profile" class="active">Profile</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#resume">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#recommendations">Recommendations</a>
+    </nav>
+
+    <!-- Profile Section -->
+    <section id="profile" class="active">
+        <div class="profile-container">
+            <!-- Glitch Effect for the main headline -->
+            <h1 class="glitch" data-text="I'M OMRI YAAKOV">I'M OMRI YAAKOV</h1>
+            <!-- Typing effect for the subheading -->
+            <h2 class="typing">Linux | AWS | HTML | Python | CCSA</h2>
+            <h2 class="typingSecond">Cyber Security | Cloud Architecture</h2>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <span class="mouse-wheel"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications">
+        <h2>Certifications And Badges</h2>
+        <div class="certification-list">
+            <div class="certification-item">
+                <a href="https://cs.lpi.org/caf/Xamman/certification/verify/LPI000615286/rqmuqlz2f2" target="_blank">
+                    <i class="fas fa-server"></i>
+                    <p>Linux Essentials</p>
+                </a>
+            </div>
+            <div class="certification-item">
+                <a href="https://www.credly.com/badges/14714b60-784f-477f-8adb-4e76864c5c98/linked_in" target="_blank">
+                    <i class="fas fa-code"></i>
+                    <p>PCEP</p>
+                </a>
+            </div>
+            <div class="certification-item">
+                <a href="https://www.credly.com/badges/b6263485-8809-4479-b785-094847b8a0d0?trk=public_profile_see-credential" target="_blank">
+                    <i class="fas fa-network-wired"></i>
+                    <p>CCNA 1</p>
+                </a>
+            </div>
+            <div class="certification-item">
+                <a href="https://www.credly.com/badges/bcf99d56-d2d9-404b-8cd4-ce9149e5b2a8/public_url" target="_blank">
+                    <i class="fab fa-aws"></i>
+                    <p>AWS Cloud Practitioner</p>
+                </a>
+            </div>
+            <div class="certification-item">
+                <a href="https://www.credly.com/badges/05aeccc9-d02d-4314-8233-0d0cb6f372ac/linked_in?t=sg1qpq" target="_blank">
+                    <i class="fab fa-aws"></i>
+                    <p>AWS Academy Cloud Foundations</p>
+                </a>
+            </div>
+            <div class="certification-item">
+                <a href="https://www.credly.com/badges/f653e5da-030c-4e0a-833e-c3e129017a0d" target="_blank">
+                    <i class="fab fa-aws"></i>
+                    <p>AWS Academy Cloud Security Foundations</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume">
+        <h2>Experience</h2>
+        <div class="experience-container">
+            <div class="experience-box">
+                <h3>Freelancer Web Developer</h3>
+                <p>Oct 2018 - Dec 2018<br>Developed responsive and user-friendly websites using HTML5, CSS3, an
+                    JavaScript. (e.g., EasyHelp).
+                    Conducted thorough testing and debugging to optimize website
+                    performance and ensure cross-browser compatibility.
+                    Integrated third-party APIs and web services to enhance website
+                    functionality as per client requirements.</p>
+            </div>
+            <div class="experience-box">
+                <h3>Yahalom Unit at IDF</h3>
+                <p>Mar 2019 - Nov 2021<br>Coordinated and centralized all safety events for the unit, prepared
+                    reports, presentations, and Excel sheets for superiors. Managed and
+                    coordinated meetings among multiple calendars of professionals
+                    involved in various projects. Also responsible for coordination and
+                    organization with safety teams, multimedia, and conferences.</p>
+            </div>
+            <div class="experience-box">
+                <h3>HelpDesk at Mila Electrical Engineering</h3>
+                <p>Jul 2022 - Present<br>Provided technical support and troubleshooting for number of users in a
+                    corporate setting.
+                    Resolved hardware and software issues promptly to minimize downtime
+                    and optimize productivity.
+                    Configured and deployed workstations, printers, and other peripherals as part o
+                    onboarding and ongoing IT operations.</p>
+            </div>
+        </div>
+        <a href="#" class="download-btn">Download Resume</a>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Projects</h2>
+        <ul>
+            <li><a href="https://github.com/omriyaakov/File-Transfer" target="_blank" style="color: #00aaff;">FileTransfer</a>: This project is a Python-based client-server application for transferring files
+                between connected clients via a central server. It features a GUI for the client,
+                enabling easy file selection, transfer, and management of online users. The
+                server efficiently handles multiple connections, broadcasts messages and
+                facilitates file sharing among clients.</li>
+            <li>-</li>
+            <li><a href="https://github.com/omriyaakov/AWS-Dashboard" target="_blank" style="color: #00aaff;">AWS Architecture Dashboard</a>: Developed an AWS Architecture Dashboard for seamless monitoring and
+                management of AWS resources. Features include interactive components,
+                detailed modals, region selection, and dark/light mode toggling. Enabled realtime insights and efficient resource management across multiple AWS regions.
+                Implemented user authenticatio</li>
+            <li>-</li>
+            <li><a href="https://github.com/omriyaakov/KeyLogger" target="_blank" style="color: #00aaff;">KeyLogger</a>: An application that implements a keylogger in Python, (The keylogger runs in the
+                background without displaying a console window) which logs all keystrokes to a
+                file and periodically sends the log file to a web server.</li>
+        </ul>
+    </section>
+
+    <!-- recommendations Section -->
+    <section id="recommendations">
+        <h2>Recommendations</h2>
+    
+        <!-- Form for submitting a new recommendation -->
+        <div class="recommendation-form">
+            <h3>Leave a Recommendation</h3>
+            <form id="recommendationForm">
+                <input type="text" id="name" placeholder="Your Name" required />
+                <textarea id="comment" placeholder="Your Recommendation" rows="4" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        
+        <!-- List to display recommendations -->
+        <div id="recommendationList">
+            <h3>Recommendations from others:</h3>
+            <!-- Existing recommendations (can be initially static) -->
+            <div class="recommendations-card">
+                <h3>John Doe</h3>
+                <p>Omri is a fantastic developer and security expert! Highly recommend working with him.</p>
+            </div>
+            <div class="recommendations-card">
+                <h3>Jane Smith</h3>
+                <p>Omri has great expertise in cloud architecture, and he's always a pleasure to collaborate with.</p>
+            </div>
+            <!-- New recommendations will be appended here dynamically -->
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Omri Yaakov. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="https://github.com/omriyaakov" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/omri-yaakov/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.paypal.com/paypalme/omriyaakov" target="_blank"><i class="fab fa-paypal"></i></a>
+        </div>
+    </footer>
+
+    <!-- JavaScript-->
+    <script>
+    let typingTimeout;
+
+    function switchTab(tabId) {
+        const firstTyping = document.querySelector('.typing');
+        const secondTyping = document.querySelector('.typingSecond');
+
+        // Clear any existing timeout if switching tabs mid-animation
+        if (typingTimeout) {
+            clearTimeout(typingTimeout);
+        }
+
+        // Reset animations when switching to the profile section
+        if (tabId === 'profile') {
+            resetTypingAnimation(firstTyping, secondTyping);
+        }
+
+        // Remove 'active' class from all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.remove('active');
+        });
+
+        // Add 'active' class to the selected section
+        document.getElementById(tabId).classList.add('active');
+
+        // Update active link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.classList.remove('active');
+        });
+        document.querySelector(`a[href="#${tabId}"]`).classList.add('active');
+    }
+
+    function resetTypingAnimation(firstTyping, secondTyping) {
+        // Clear any previously running animations and timeouts
+        clearTimeout(typingTimeout);
+        firstTyping.style.display = 'inline-block';
+        firstTyping.style.visibility = 'visible';
+        secondTyping.style.display = 'none';
+
+        // Force reflow to restart the typing animations
+        firstTyping.classList.remove('typing');
+        secondTyping.classList.remove('typingSecond');
+        void firstTyping.offsetWidth;  // Force reflow to restart animation
+        void secondTyping.offsetWidth; // Force reflow to restart animation
+
+        // Re-apply the typing animations
+        firstTyping.classList.add('typing');
+        secondTyping.classList.add('typingSecond');
+
+        // Ensure that the second line starts only after the first line has fully erased
+        typingTimeout = setTimeout(function() {
+            firstTyping.style.visibility = 'hidden'; // Hide after erasing
+            secondTyping.style.display = 'inline-block'; // Show second sentence
+        }, 5900); // Total time: 4s typing + 2s erasing
+    }
+
+    window.onload = function() {
+        const firstTyping = document.querySelector('.typing');
+        const secondTyping = document.querySelector('.typingSecond');
+
+        // Initial typing animation start
+        resetTypingAnimation(firstTyping, secondTyping);
+
+        // Handle the recommendation form submission
+        document.getElementById('recommendationForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent form submission from reloading the page
+
+            // Get the form input values
+            const name = document.getElementById('name').value;
+            const comment = document.getElementById('comment').value;
+
+            // Create a new recommendation element
+            const recommendation = document.createElement('div');
+            recommendation.classList.add('recommendations-card');
+            recommendation.innerHTML = `<h3>${name}</h3><p>${comment}</p>`;
+
+            // Append the new recommendation to the list
+            document.getElementById('recommendationList').appendChild(recommendation);
+
+            // Clear the form fields after submission
+            document.getElementById('name').value = '';
+            document.getElementById('comment').value = '';
+        });
+
+        // Neon Cursor Implementation
+        const cursor = document.createElement('div');
+        cursor.classList.add('cursor');
+        document.body.appendChild(cursor);
+
+        // Handle cursor movement
+        window.addEventListener('mousemove', (e) => {
+            // Move the neon cursor
+            cursor.style.transform = `translate(${e.pageX - 7.5}px, ${e.pageY - 7.5}px)`;
+
+            // Create the trail effect
+            const trail = document.createElement('div');
+            trail.classList.add('trail');
+            trail.style.left = `${e.pageX - 4}px`;
+            trail.style.top = `${e.pageY - 4}px`;
+            document.body.appendChild(trail);
+
+            // Remove the trail after animation completes
+            setTimeout(() => {
+                trail.remove();
+            }, 500); // Matches the animation duration (0.5s)
+        });
+
+        // Highlight navigation link based on scrolling position and reset profile typing animation
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll("nav a");
+
+        const observerOptions = {
+            root: null,  // Use viewport as the root
+            threshold: 0.6  // Trigger when 60% of the section is visible
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    // Remove 'active' class from all links
+                    navLinks.forEach(link => link.classList.remove('active'));
+
+                    // Add 'active' class to the link corresponding to the visible section
+                    const activeLink = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+                    activeLink.classList.add('active');
+
+                    // If the profile section is visible, reset the typing animation
+                    if (entry.target.id === 'profile') {
+                        resetTypingAnimation(firstTyping, secondTyping);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe each section
+        sections.forEach(section => observer.observe(section));
+    };
+
+    </script>
+    
+
+    
+    
+
+
+    <!-- Font Awesome for social media icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
